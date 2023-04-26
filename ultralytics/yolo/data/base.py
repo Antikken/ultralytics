@@ -14,6 +14,7 @@ import numpy as np
 import psutil
 from torch.utils.data import Dataset
 from tqdm import tqdm
+import tifffile as tiff
 
 from ..utils import LOCAL_RANK, LOGGER, NUM_THREADS, TQDM_BAR_FORMAT
 from .utils import HELP_URL, IMG_FORMATS
@@ -138,7 +139,8 @@ class BaseDataset(Dataset):
             if fn.exists():  # load npy
                 im = np.load(fn)
             else:  # read image
-                im = cv2.imread(f)  # BGR
+                #im = cv2.imread(f)  # BGR
+                im = tiff.imread(f)
                 if im is None:
                     raise FileNotFoundError(f'Image Not Found {f}')
             h0, w0 = im.shape[:2]  # orig hw

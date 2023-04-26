@@ -14,6 +14,7 @@ import numpy as np
 import requests
 import torch
 from PIL import Image
+import tifffile as tiff
 
 from ultralytics.yolo.data.augment import LetterBox
 from ultralytics.yolo.data.utils import IMG_FORMATS, VID_FORMATS
@@ -249,9 +250,12 @@ class LoadImages:
         else:
             # Read image
             self.count += 1
-            im0 = cv2.imread(path)  # BGR
-            if im0 is None:
-                raise FileNotFoundError(f'Image Not Found {path}')
+            if(not path.endswith('.tiff')):
+                im0 = cv2.imread(path)  # BGR
+                if im0 is None:
+                    raise FileNotFoundError(f'Image Not Found {path}')
+            else:
+                im0 = tiff.imread(path)
             s = f'image {self.count}/{self.nf} {path}: '
 
         if self.transforms:

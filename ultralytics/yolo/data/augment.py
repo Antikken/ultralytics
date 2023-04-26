@@ -515,7 +515,7 @@ class LetterBox:
         top, bottom = int(round(dh - 0.1)), int(round(dh + 0.1))
         left, right = int(round(dw - 0.1)), int(round(dw + 0.1))
         img = cv2.copyMakeBorder(img, top, bottom, left, right, cv2.BORDER_CONSTANT,
-                                 value=(114, 114, 114))  # add border
+                                 value=(114, 114, 114, 114))  # add border
 
         if len(labels):
             labels = self._update_labels(labels, ratio, dw, dh)
