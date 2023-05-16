@@ -140,7 +140,7 @@ class BaseDataset(Dataset):
                 im = np.load(fn)
             else:  # read image
                 #im = cv2.imread(f)  # BGR
-                im = tiff.imread(f)
+                im = tiff.imread(f, maxworkers=1)
                 if im is None:
                     raise FileNotFoundError(f'Image Not Found {f}')
             h0, w0 = im.shape[:2]  # orig hw

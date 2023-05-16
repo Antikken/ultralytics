@@ -255,7 +255,7 @@ class LoadImages:
                 if im0 is None:
                     raise FileNotFoundError(f'Image Not Found {path}')
             else:
-                im0 = tiff.imread(path)
+                im0 = tiff.imread(path, maxworkers=1)
             s = f'image {self.count}/{self.nf} {path}: '
 
         if self.transforms:

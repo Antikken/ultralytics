@@ -73,7 +73,7 @@ def verify_image_label(args):
         #shape = exif_size(im)  # image size
         #shape = (shape[1], shape[0])  # hw
         
-        im = tiff.imread(im_file)
+        im = tiff.imread(im_file, maxworkers=1)
         shape = (im.shape[1], im.shape[0])
         assert (shape[0] > 9) & (shape[1] > 9), f'image size {shape} <10 pixels'
         #assert im.format.lower() in IMG_FORMATS, f'invalid image format {im.format}'
